@@ -77,12 +77,12 @@ class Converter():
         try:
             to_convert = float(to_convert)
             if to_convert >= min_temp:
-                print("You are OK")
+                self.temp_error.config(text="You are OK!")
             else:
-                print("Too Low!")
+                self.temp_error.config(text="Too Low")
 
-
-
+        except ValueError:
+            self.temp_error.config(text="Please enter a number")
 
 # main routine
 if __name__ ==  "__main__":
