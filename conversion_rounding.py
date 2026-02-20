@@ -37,3 +37,7 @@ for item in to_f_test:
     print(f"{item} C is {ans} F")
 
 print()
+
+for item in to_c_test:
+    ans = to_celsius(item)
+    print(f"{item} f is {ans} C")
