@@ -63,13 +63,11 @@ class HistoryExport:
         export_instruction_txt = ("Please push <Export> to save your calculations in your"
                                   "file. If the filename already exists, it will be saved")
 
-        calculations = ""
-
         # Label list (label text | format | bg)
         history_labels_list = [
         ["History / Export", ("Arial", 16, "bold"), None],
         [recent_intro_txt, ("Arial", 11), None],
-        ["calculations list", ("Arial", 14), green_back],
+        ["calculation list", ("Arial", 14), green_back],
         [export_instruction_txt, ("Arial", 11), None]
     ]
 

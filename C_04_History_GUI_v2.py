@@ -12,6 +12,10 @@ class Converter:
         Temperature converter GUI
         """
 
+        # self.all_calculations_list = ['10.0 °F is -12°C', '20.0 °F is -7°C',
+        #                               '30.0 °F is -1°C', '40.0 °F is 4°C',
+        #                               '50.0 °F is 10°C', '60.0 °F is 16°C']
+
         self.all_calculations_list = ['10.0 °F is -12°C', '20.0 °F is -7°C',
                                       '30.0 °F is -1°C', '40.0 °F is 4°C',
                                       '50.0 °F is 10°C', '60.0 °F is 16°C']
@@ -21,7 +25,7 @@ class Converter:
 
         self.to_history_button = Button(self.temp_frame,
                                         text="History / Export",
-                                        bg="#CC600",
+                                        bg="#CC6600",
                                         fg="#FFFFFF",
                                         font=("Arial", 14, "bold"), width=12,
                                         command=self.to_history)
@@ -71,16 +75,34 @@ class HistoryExport:
         recent_intro_txt = (f"Below are {calc_amount} calculations "
                             "(to the nearest degree).")
 
+        # Create string from calculations list (newest calculations first)
+        newest_first_string = ""
+        newest_first_list = list(reversed(calculations))
+
+        if len(newest_first_list) <= c.MAX_CALCS:
+
+            for item in newest_first_list[:-1]:
+                newest_first_string += item + "\n"
+
+            newest_first_string += newest_first_list[-1]
+
+        # If we have more than five items...
+        else:
+            for item in newest_first_list[:c.MAX_CALCS-1]:
+                newest_first_string += item + "\n"
+
+            newest_first_string += newest_first_list[c.MAX_CALCS-1]
+
         export_instruction_txt = ("Please push <Export> to save your calculations in your"
                                   "file. If the filename already exists, it will be saved")
 
-        calculations = ""
+
 
         # Label list (label text | format | bg)
         history_labels_list = [
         ["History / Export", ("Arial", 16, "bold"), None],
         [recent_intro_txt, ("Arial", 11), None],
-        ["calculations list", ("Arial", 14), calc_back],
+        [newest_first_string, ("Arial", 14), calc_back],
         [export_instruction_txt, ("Arial", 11), None]
     ]
 
@@ -113,7 +135,7 @@ class HistoryExport:
             self.make_button = Button(self.hist_button_frame,
                                       font=("Arial", 12, "bold"),
                                       text=btn[0], bg=btn[1],
-                                      fg="FFFFFF", width=12,
+                                      fg="#FFFFFF", width=12,
                                       command=btn[2])
             self.make_button.grid(row=btn[3], column=btn[4], padx=10, pady=10)
 
@@ -131,3 +153,5 @@ class HistoryExport:
 if __name__ == "__main__":
     root = Tk()
     root.title("Temperature Converter")
+    Converter()
+    root.mainloop()
